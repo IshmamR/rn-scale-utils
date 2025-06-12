@@ -86,6 +86,10 @@ Returns an object with:
 - Booleans: `isPortrait`, `isLandscape`
 - Utility: `isTall(threshold?)`
 
+<!-- GitAds-Verify: 9P16DG7NMSC6WO1PXN2W11K2M7315YHE -->
+## GitAds Sponsored
+[![Sponsored by GitAds](https://gitads.dev/v1/ad-serve?source=ishmamr/rn-scale-utils@github)](https://gitads.dev/v1/ad-track?source=ishmamr/rn-scale-utils@github)
+
 ## 🔧 Build
 
 ```bash
@@ -97,5 +101,3 @@ MIT
 
 ## 👨‍💻 Author
 Created by IshmamR — contributions welcome!
-
-<!-- GitAds-Verify: 9P16DG7NMSC6WO1PXN2W11K2M7315YHE -->
