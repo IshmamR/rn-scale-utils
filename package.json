@@ -1,5 +1,6 @@
 {
   "name": "rn-scale-utils",
+  "description": "Responsive scaling utilities for React Native apps, including dimension helpers and a dynamic orientation hook.",
   "version": "0.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -21,9 +22,12 @@
     "dimension",
     "responsive"
   ],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "author": "IshmamR",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IshmamR/rn-scale-utils"
+  },
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-native": ">=0.60.0"
