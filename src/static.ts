@@ -1,4 +1,5 @@
 import { Dimensions } from "react-native";
+import type { Orientation } from "./types";
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("screen");
 export { SCREEN_WIDTH, SCREEN_HEIGHT };
@@ -7,19 +8,25 @@ export { SCREEN_WIDTH, SCREEN_HEIGHT };
  * Width Percentage - Scales a size horizontally based on the base width.
  * Useful for responsive horizontal spacing, widths, etc.
  * @param size the width you want
- * @param factor For scaling reference. Defaults to `375` (iPhone X width).
+ * @param guidelineBaseWidth For scaling reference. Defaults to `375` (iPhone X width).
  */
-export const wp = (size: number, guidelineBaseWidth = 375) =>
-  (Dimensions.get("screen").width / guidelineBaseWidth) * size;
+export const wp = (size: number, guidelineBaseWidth = 375) => {
+  if (size <= 0) return 0;
+  if (guidelineBaseWidth <= 0) return size;
+  return (SCREEN_WIDTH / guidelineBaseWidth) * size;
+};
 
 /**
  * Height Percentage - Scales a size vertically based on the base height.
  * Useful for responsive vertical spacing, heights, etc.
  * @param size the height you want
- * @param factor For scaling reference. Defaults to `812` (iPhone X height).
+ * @param guidelineBaseHeight For scaling reference. Defaults to `812` (iPhone X height).
  */
-export const hp = (size: number, guidelineBaseHeight = 812) =>
-  (Dimensions.get("screen").height / guidelineBaseHeight) * size;
+export const hp = (size: number, guidelineBaseHeight = 812) => {
+  if (size <= 0) return 0;
+  if (guidelineBaseHeight <= 0) return size;
+  return (SCREEN_HEIGHT / guidelineBaseHeight) * size;
+};
 
 /**
  * Font Percentage - Scales a font size based on the screen height,
@@ -36,19 +43,11 @@ export const fp = (size: number, factor = 0.5) =>
  * @param size the size you want
  * @param factor default `2.2`
  */
-export const sp = (size: number, factor = 2.2): number => {
-  return (
-    ((Dimensions.get("screen").height / Dimensions.get("screen").width) *
-      size) /
-    factor
-  );
-};
-
-export type Orientation = "portrait" | "landscape";
+export const sp = (size: number, factor = 2.2): number =>
+  ((SCREEN_HEIGHT / SCREEN_WIDTH) * size) / factor;
 
 /**
  * Determines the orientation of a screen based on its dimensions.
- * @param {ScaledSize} dim - The dimensions object containing `width` and `height` properties.
  * @returns {Orientation} Returns `"portrait"` if height is greater than or equal to width, otherwise `"landscape"`.
  */
 export const getOrientation = (): Orientation => {
@@ -59,24 +58,15 @@ export const getOrientation = (): Orientation => {
 /**
  * Returns true if the screen is in portrait mode
  */
-export const isPortrait = () => {
-  const dim = Dimensions.get("screen");
-  return dim.height >= dim.width;
-};
+export const isPortrait = SCREEN_HEIGHT >= SCREEN_WIDTH;
 
 /**
  * Returns true of the screen is in landscape mode
  */
-export const isLandscape = () => {
-  const dim = Dimensions.get("screen");
-  return dim.width >= dim.height;
-};
+export const isLandscape = SCREEN_WIDTH >= SCREEN_HEIGHT;
 
 /**
  * Returns true if we have a tall screen
  * @param threshold Minimum screen height to call it tall. Defaults to `800`.
  */
-export const isTall = (threshold = 800) => {
-  const dim = Dimensions.get("screen");
-  return dim.height >= threshold;
-};
+export const isTall = (threshold = 800) => SCREEN_HEIGHT >= threshold;

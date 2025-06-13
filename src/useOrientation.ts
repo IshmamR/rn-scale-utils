@@ -1,51 +1,66 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Dimensions, type ScaledSize } from "react-native";
-import { wp, hp, fp, sp, isTall, type Orientation } from "./static";
-
-type OrientationHookReturn = {
-  screen: ScaledSize;
-  orientation: Orientation;
-  wp: typeof wp;
-  hp: typeof hp;
-  fp: typeof fp;
-  sp: typeof sp;
-  isPortrait: boolean;
-  isLandscape: boolean;
-  isTall: typeof isTall;
-};
-
-const getOrientation = (dim: ScaledSize): Orientation =>
-  dim.height >= dim.width ? "portrait" : "landscape";
+import type { Orientation, OrientationHookReturn } from "./types";
 
 export const useOrientation = (): OrientationHookReturn => {
   const [screen, setScreen] = useState(Dimensions.get("screen"));
-  const [orientation, setOrientation] = useState<Orientation>(
-    getOrientation(Dimensions.get("screen"))
-  );
+
+  const orientation: Orientation = useMemo(() => {
+    return screen.height >= screen.width ? "portrait" : "landscape";
+  }, [screen.height, screen.width]);
 
   useEffect(() => {
     const handler = ({ screen: scr }: { screen: ScaledSize }) => {
-      setScreen(scr);
-      setOrientation(getOrientation(scr));
+      try {
+        setScreen(scr);
+      } catch (error) {
+        console.warn(
+          "[RN_SCALE_UTILS] Failed to update screen dimensions:",
+          error
+        );
+      }
     };
 
     const subscription = Dimensions.addEventListener("change", handler);
 
     return () => {
-      subscription.remove?.(); // for RN >= 0.65
+      subscription?.remove?.(); // for RN >= 0.65
     };
   }, []);
 
-  const wp = (size: number, baseWidth = 375) =>
-    (screen.width / baseWidth) * size;
+  const wp = useCallback(
+    (size: number, baseWidth = 375) => {
+      if (size <= 0) return 0;
+      if (baseWidth <= 0) return size;
+      return (screen.width / baseWidth) * size;
+    },
+    [screen.width]
+  );
 
-  const hp = (size: number, baseHeight = 812) =>
-    (screen.height / baseHeight) * size;
+  const hp = useCallback(
+    (size: number, baseHeight = 812) => {
+      if (size <= 0) return 0;
+      if (baseHeight <= 0) return size;
+      return (screen.height / baseHeight) * size;
+    },
+    [screen.height]
+  );
 
-  const fp = (size: number, factor = 0.5) => size + (hp(size) - size) * factor;
+  const fp = useCallback(
+    (size: number, factor = 0.5) => size + (hp(size) - size) * factor,
+    [hp]
+  );
 
-  const sp = (size: number, factor = 2.2) =>
-    ((screen.height / screen.width) * size) / factor;
+  const sp = useCallback(
+    (size: number, factor = 2.2) =>
+      ((screen.height / screen.width) * size) / factor,
+    [screen.height, screen.width]
+  );
+
+  const isTall = useCallback(
+    (threshold = 800) => screen.height >= threshold,
+    [screen.height]
+  );
 
   return {
     screen,
@@ -56,6 +71,6 @@ export const useOrientation = (): OrientationHookReturn => {
     sp,
     isPortrait: orientation === "portrait",
     isLandscape: orientation === "landscape",
-    isTall: (threshold = 800) => screen.height >= threshold,
+    isTall,
   };
 };
