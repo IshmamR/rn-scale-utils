@@ -12,6 +12,7 @@
     }
   },
   "scripts": {
+    "lint": "eslint src --ext .ts",
     "build": "rm -rf dist; tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -35,6 +36,13 @@
   "devDependencies": {
     "@types/react": "^19.1.8",
     "@types/react-native": "^0.72.8",
+    "@typescript-eslint/eslint-plugin": "^8.34.0",
+    "@typescript-eslint/parser": "^8.34.0",
+    "eslint": "^8.57.1",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-native": "^5.0.0",
     "typescript": "^5.8.3"
   },
   "engines": {

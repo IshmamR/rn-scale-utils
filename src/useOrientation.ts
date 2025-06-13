@@ -16,7 +16,7 @@ export const useOrientation = (): OrientationHookReturn => {
       } catch (error) {
         console.warn(
           "[RN_SCALE_UTILS] Failed to update screen dimensions:",
-          error
+          error,
         );
       }
     };
@@ -34,7 +34,7 @@ export const useOrientation = (): OrientationHookReturn => {
       if (baseWidth <= 0) return size;
       return (screen.width / baseWidth) * size;
     },
-    [screen.width]
+    [screen.width],
   );
 
   const hp = useCallback(
@@ -43,23 +43,23 @@ export const useOrientation = (): OrientationHookReturn => {
       if (baseHeight <= 0) return size;
       return (screen.height / baseHeight) * size;
     },
-    [screen.height]
+    [screen.height],
   );
 
   const fp = useCallback(
     (size: number, factor = 0.5) => size + (hp(size) - size) * factor,
-    [hp]
+    [hp],
   );
 
   const sp = useCallback(
     (size: number, factor = 2.2) =>
       ((screen.height / screen.width) * size) / factor,
-    [screen.height, screen.width]
+    [screen.height, screen.width],
   );
 
   const isTall = useCallback(
     (threshold = 800) => screen.height >= threshold,
-    [screen.height]
+    [screen.height],
   );
 
   return {

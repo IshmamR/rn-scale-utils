@@ -2,7 +2,7 @@ import { Dimensions } from "react-native";
 import type { Orientation } from "./types";
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("screen");
-export { SCREEN_WIDTH, SCREEN_HEIGHT };
+export { SCREEN_HEIGHT, SCREEN_WIDTH };
 
 /**
  * Width Percentage - Scales a size horizontally based on the base width.
