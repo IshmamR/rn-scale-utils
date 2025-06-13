@@ -1,40 +1,44 @@
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
   root: true,
-  parser: '@typescript-eslint/parser',
+  parser: "@typescript-eslint/parser",
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: './tsconfig.json',
+    ecmaVersion: "latest",
+    sourceType: "module",
+    project: "./tsconfig.eslint.json",
+    tsconfigRootDir: __dirname,
   },
   plugins: [
-    'react',
-    'react-native',
-    'react-hooks',
-    '@typescript-eslint',
-    'import',
+    "react",
+    "react-native",
+    "react-hooks",
+    "@typescript-eslint",
+    "import",
+    "jest",
   ],
   extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    'plugin:react-native/all',
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:react-native/all",
+    "plugin:jest/recommended",
   ],
   env: {
     es6: true,
     node: true,
-    'react-native/react-native': true,
+    jest: true,
+    "react-native/react-native": true,
   },
   settings: {
     react: {
-      version: 'detect',
+      version: "detect",
     },
   },
   rules: {
-    'react/react-in-jsx-scope': 'off', // not needed in React 17+
-    'import/order': ['warn', { alphabetize: { order: 'asc' } }],
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    "react/react-in-jsx-scope": "off", // not needed in React 17+
+    "import/order": ["warn", { alphabetize: { order: "asc" } }],
+    "@typescript-eslint/explicit-module-boundary-types": "off",
   },
-  ignorePatterns: ['dist', 'node_modules'],
+  ignorePatterns: ["dist", "node_modules"],
 };
