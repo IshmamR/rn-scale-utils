@@ -15,11 +15,5 @@
     "strictFunctionTypes": true,                         /* When assigning functions, check to ensure parameters and the return values are subtype-compatible. */
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
-  "include": ["src"],
-  "exclude": [
-    "src/__tests__",
-    "src/test-utils",
-    "src/**/*.test.ts",
-    "src/**/*.test.tsx"
-  ]
+  "include": ["src"]
 }

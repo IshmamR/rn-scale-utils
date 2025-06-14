@@ -1,7 +1,7 @@
 {
   "name": "rn-scale-utils",
   "description": "Responsive scaling utilities for React Native apps, including dimension helpers and a dynamic orientation hook.",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -14,7 +14,7 @@
   "files": ["dist"],
   "scripts": {
     "lint": "eslint src --ext .ts",
-    "build": "rm -rf dist; tsc",
+    "build": "rm -rf dist; tsc; rm -rf dist/__tests__; rm -rf dist/test-utils",
     "prepublishOnly": "npm run build; npm run lint; npm run test",
     "prepare": "npm run build",
     "test": "jest"
