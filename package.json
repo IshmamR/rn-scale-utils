@@ -1,7 +1,7 @@
 {
   "name": "rn-scale-utils",
   "description": "Responsive scaling utilities for React Native apps, including dimension helpers and a dynamic orientation hook.",
-  "version": "0.6.9",
+  "version": "0.7.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {

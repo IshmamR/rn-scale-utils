@@ -1,6 +1,6 @@
 <div align="center"><a name="readme-top"></a>
 
-<img height="180" src="./assets/logo.png">
+<img height="180" src="https://raw.githubusercontent.com/IshmamR/rn-scale-utils/refs/heads/main/assets/logo.png">
 
 <h1>rn-scale-utils</h1>
 
